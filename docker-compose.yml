@@ -1,0 +1,36 @@
+version: "3"
+services:
+  spotify-fetcher:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: spotify-fetcher:latest
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    expose:
+      - 8080
+    depends_on:
+      - db
+    networks:
+      - spotify-fetcher-network
+  db:
+    image: postgres
+    env_file:
+      - .env
+    volumes:
+      - pgdb:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    restart: unless-stopped
+    networks:
+      - spotify-fetcher-network
+networks:
+  spotify-fetcher-network:
+    driver: bridge
+volumes:
+  pgdb:
+
