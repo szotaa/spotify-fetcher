@@ -4,7 +4,6 @@ import pl.szotaa.spotifyfetcher.persistence.Track;
 
 import java.util.Collection;
 
-public interface TrackInfoEnricher {
+public interface TrackInfoEnricher extends Enricher<Track> {
     Collection<Track> enrich(Collection<Track> tracks);
-    Track enrich(Track track);
 }
