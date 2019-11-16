@@ -8,7 +8,6 @@ import pl.szotaa.spotifyfetcher.SpotifyPlayHistoryService;
 import pl.szotaa.spotifyfetcher.TrackListenService;
 import pl.szotaa.spotifyfetcher.mapping.ItemMapper;
 
-import javax.annotation.PostConstruct;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,7 +23,6 @@ public class FetchTracksScheduledJob implements ScheduledJob {
     private final TrackListenService trackListenService;
 
     @Override
-    @PostConstruct
     @Scheduled(cron = EVERY_THREE_HOURS_CRON_EXPRESSION)
     public void execute() {
         var accessToken = authService.getAccessToken();

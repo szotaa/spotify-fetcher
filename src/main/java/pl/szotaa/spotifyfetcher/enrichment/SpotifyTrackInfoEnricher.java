@@ -33,7 +33,6 @@ public class SpotifyTrackInfoEnricher implements TrackInfoEnricher {
 
     @Override
     public Track enrich(Track track) {
-        log.info("Enriching track with spotify id {}", track.getSpotifyId());
         var restTemplate = restTemplateBuilder.build();
         var accessToken = spotifyAuthService.getAccessToken();
         var response = restTemplate.exchange(

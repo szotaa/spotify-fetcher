@@ -7,7 +7,6 @@ import pl.szotaa.spotifyfetcher.enrichment.TrackInfoEnricher;
 import pl.szotaa.spotifyfetcher.persistence.Track;
 import pl.szotaa.spotifyfetcher.persistence.TrackRepository;
 
-import javax.annotation.PostConstruct;
 import java.util.Collection;
 
 @Component
@@ -20,7 +19,6 @@ public class FetchTracksInfoScheduledJob implements ScheduledJob {
     private final TrackInfoEnricher trackInfoEnricher;
 
     @Override
-    @PostConstruct
     @Scheduled(cron = EVERY_6_HOURS_AT_HALF_PAST_CRON_TAB)
     public void execute() {
         var tracks = trackRepository.findTop100ByTrackInfoIsNull();
