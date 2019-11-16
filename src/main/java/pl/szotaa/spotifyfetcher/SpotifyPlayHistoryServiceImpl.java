@@ -1,13 +1,11 @@
 package pl.szotaa.spotifyfetcher;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.szotaa.spotifyfetcher.dto.SpotifyRecentlyPlayedResponse;
+import pl.szotaa.spotifyfetcher.util.AuthorizedRequestFactory;
 
 @Service
 public class SpotifyPlayHistoryServiceImpl implements SpotifyPlayHistoryService {
@@ -25,15 +23,8 @@ public class SpotifyPlayHistoryServiceImpl implements SpotifyPlayHistoryService 
         return restTemplate.exchange(
                 SPOTIFY_RECENTLY_PLAYED_API_URL,
                 HttpMethod.GET,
-                buildRequest(accessToken),
+                AuthorizedRequestFactory.build(accessToken),
                 SpotifyRecentlyPlayedResponse.class
         ).getBody();
-    }
-
-    private HttpEntity buildRequest(String accessToken) {
-        var headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + accessToken);
-        return new HttpEntity<>(headers);
     }
 }

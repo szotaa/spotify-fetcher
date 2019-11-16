@@ -1,8 +1,11 @@
-package pl.szotaa.spotifyfetcher;
+package pl.szotaa.spotifyfetcher.schedule;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import pl.szotaa.spotifyfetcher.SpotifyAuthService;
+import pl.szotaa.spotifyfetcher.SpotifyPlayHistoryService;
+import pl.szotaa.spotifyfetcher.TrackListenService;
 import pl.szotaa.spotifyfetcher.mapping.ItemMapper;
 
 import javax.annotation.PostConstruct;
