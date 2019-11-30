@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class FetchTracksScheduledJob implements ScheduledJob {
 
-    private static final String EVERY_THREE_HOURS_CRON_EXPRESSION = "0 0 */3 * * *";
+    private static final String EVERY_HOUR_CRON_EXPRESSION = "0 * * * * *";
 
     private final SpotifyAuthService authService;
     private final SpotifyPlayHistoryService playHistoryService;
@@ -23,7 +23,7 @@ public class FetchTracksScheduledJob implements ScheduledJob {
     private final TrackListenService trackListenService;
 
     @Override
-    @Scheduled(cron = EVERY_THREE_HOURS_CRON_EXPRESSION)
+    @Scheduled(cron = EVERY_HOUR_CRON_EXPRESSION)
     public void execute() {
         var accessToken = authService.getAccessToken();
         var recentlyPlayedTracks = playHistoryService.getRecentlyPlayedTracks(accessToken);
