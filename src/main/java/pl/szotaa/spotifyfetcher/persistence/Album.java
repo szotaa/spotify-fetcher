@@ -8,15 +8,19 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -46,4 +50,8 @@ public class Album implements SpotifyIdentifiable {
 
     @OneToMany(mappedBy = "album")
     private List<Track> tracks;
+
+    @ElementCollection
+    @CollectionTable(name = "album_genre", joinColumns = @JoinColumn(name = "album_id"))
+    private Set<AlbumGenre> genres;
 }
